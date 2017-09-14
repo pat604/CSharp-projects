@@ -1,0 +1,17 @@
+﻿<Window x:Class="ClientWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="516.825" Width="525" Loaded="Window_Loaded_1">
+    <Grid>
+        <ComboBox x:Name="comboBoxSorozatok" HorizontalAlignment="Left" Height="26" Margin="191,28,0,0" VerticalAlignment="Top" Width="182" SelectionChanged="comboBoxSorozatok_SelectionChanged"/>
+        <Label Content="sorozatok:" HorizontalAlignment="Left" Height="25" Margin="23,28,0,0" VerticalAlignment="Top" Width="95"/>
+        <ListBox x:Name="listBoxElerhetoEpizodok" HorizontalAlignment="Left" Height="143" Margin="191,71,0,0" VerticalAlignment="Top" Width="298"/>
+        <Label Content="a sorozat epizódjai:" HorizontalAlignment="Left" Height="43" Margin="23,71,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button Content="hozzáad" HorizontalAlignment="Left" Height="31" Margin="23,183,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click_1"/>
+        <ListBox x:Name="listBoxKivalasztottEpizodok" HorizontalAlignment="Left" Height="180" Margin="191,228,0,0" VerticalAlignment="Top" Width="298"/>
+        <Label Content="a kiválasztott epizódok:" HorizontalAlignment="Left" Height="32" Margin="23,237,0,0" VerticalAlignment="Top" Width="149"/>
+        <Label Content="idő sum:" HorizontalAlignment="Left" Height="27" Margin="23,435,0,0" VerticalAlignment="Top" Width="136"/>
+        <Label x:Name="labelIdo" Content="" HorizontalAlignment="Left" Height="27" Margin="191,435,0,0" VerticalAlignment="Top" Width="155"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,99 @@
+﻿<Window x:Class="CurrentProject.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CurrentProject.ViewModel.Converter"
+        Title="Rupland - Áttekintés" Height="710" Width="1224" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:EFDateTimeToNormalDateTimeConverter x:Key="EFDateTimeConverter"></local:EFDateTimeToNormalDateTimeConverter>
+    </Window.Resources>
+    <Grid>
+
+        <DockPanel Background="Lavender" Height="25" LastChildFill="False" Margin="10,10,10,0" VerticalAlignment="Top">
+            <Label Content="{Binding TopWelcomeLabel}" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" DockPanel.Dock="Left" Height="25" Width="300" VerticalContentAlignment="Center" Padding="5,0,0,0"/>
+            <Button Content="Kijelentkezés" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="95" DockPanel.Dock="Right" Height="25" Cursor="Hand" Click="buttonLogout_Click"/>
+            <Button Content="Beállítások" HorizontalAlignment="Left" Margin="0,0,15,0" VerticalAlignment="Top" Width="95" DockPanel.Dock="Right" Height="25" Cursor="Hand" Click="buttonSettings_Click"/>
+        </DockPanel>
+
+        <Label Content="Projektek" Background="LightSteelBlue" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="200" />
+        
+        <Button Content="Új" HorizontalAlignment="Left" Margin="166,43,0,0" VerticalAlignment="Top" Width="40" Click="buttonNewProject_Click" Cursor="Hand"/>
+
+        <ListBox Background="GhostWhite" BorderBrush="DarkGray" BorderThickness="1" ItemsSource="{Binding UserProjects}" SelectedValuePath="ProjectId" SelectedValue="{Binding SelectedProjectId}" HorizontalAlignment="Left" Margin="10,71,0,0" Width="200" Height="500" VerticalAlignment="Top" SelectionChanged="ListBoxProject_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Height="80">
+                        <Label Content="{Binding Name}" FontWeight="Medium" />
+                        <Label ContentStringFormat="Határidő: {0}" Content="{Binding EndDate, Converter={StaticResource EFDateTimeConverter}}" FontSize="11" />
+                        <Label ContentStringFormat="Szerepkör: {0}" Content="{Binding RoleName}" FontSize="11" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Margin="215,42,0,10" Visibility="{Binding MainGridVisibility}" HorizontalAlignment="Left" Width="799">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid Height="900">
+
+                    <StackPanel HorizontalAlignment="Left" Width="510">
+
+                        <StackPanel DataContext="{Binding SelectedProject}"  HorizontalAlignment="Left" Width="490" Margin="10,0,0,20" Height="175">
+                            <Label Content="{Binding Name}" FontSize="18" />
+                            <TextBlock Text="{Binding Description}" FontSize="11" Margin="0,0,0,30" TextWrapping="Wrap" Height="50" />
+                            <Label ContentStringFormat="Indulás: {0}" Content="{Binding StartDate, Converter={StaticResource EFDateTimeConverter}}" FontSize="12" Margin="0,0,0,5" />
+                            <Label ContentStringFormat="Befejezés: {0}" Content="{Binding StartDate, Converter={StaticResource EFDateTimeConverter}}" FontSize="12" Margin="0,0,0,0" />
+                        </StackPanel>
+
+                        <StackPanel Background="Lavender" Orientation="Horizontal" Margin="10,0,-261,0" Height="34">
+                            <Label Content="Feladatok" VerticalContentAlignment="Center" Margin="10,0,30,0"/>
+                            <Button Content="Új feladat" HorizontalAlignment="Right" Margin="0,7,15,0" VerticalAlignment="Top" Width="100" Cursor="Hand" Click="buttonNewTask_Click" />
+                            <Button Content="Frissítés" HorizontalAlignment="Right" Margin="0,7,0,0" VerticalAlignment="Top" Width="100" Cursor="Hand" Click="buttonRefreshStackPanel" />
+                        </StackPanel>
+
+                        <StackPanel x:Name="stackPanelMilestones" HorizontalAlignment="Left" Width="771" Margin="0,0,-261,0"/>
+
+                    </StackPanel>
+
+                    <Label Content="Résztvevők" Background="Lavender" HorizontalAlignment="Left" Margin="510,0,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="262" Height="35"/>
+                    <Button x:Name="buttonNewMember" Content="Felvétel" Margin="691,7,16,871" Cursor="Hand" Click="buttonNewMember_Click"/>
+                    <ListBox Background="GhostWhite" BorderBrush="DarkGray" BorderThickness="1" ItemsSource="{Binding SelectedProjectMember}" Height="135" Margin="510,0,10,725" VerticalAlignment="Bottom">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="220">
+                                    <Label Content="{Binding FullName}" HorizontalAlignment="Left" Width="110" VerticalContentAlignment="Center" Height="25"></Label>
+                                    <Label Content="{Binding RoleName}" HorizontalAlignment="Left" Width="110" VerticalContentAlignment="Center" Height="25" Margin="123,0,0,0" FontStyle="Italic"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+        <Border Margin="1019,42,10,10" Visibility="{Binding MainGridVisibility}" BorderBrush="#FFA9A9A9" BorderThickness="1">
+            
+            <StackPanel Margin="7,7,7,7" >
+
+                <Label Content="Chat" Background="LightSteelBlue" />
+                <ListBox ItemsSource="{Binding ChatMessages}" Height="460" Padding="5" IsEnabled="False">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Message}" TextWrapping="WrapWithOverflow" Width="135"/>
+                                <Label Content="{Binding FullNameWithDate}" FontSize="9" FontStyle="Italic" FontWeight="Medium"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBox Text="{Binding TextBoxChatMessage}" Height="70" Padding="5" Margin="0,8" TextWrapping="Wrap" />
+                <Button Content="Küldés" VerticalAlignment="Bottom" Height="24" Click="buttonNewMessage_Click" Cursor="Hand"/>
+
+            </StackPanel>
+        </Border>
+        
+        <Label Background="Lavender" Content="Aktuális árfolyamok (MNB)" BorderThickness="0,0,0,1" BorderBrush="#FFD8D8D8" HorizontalAlignment="Left" Margin="10,584,0,0" VerticalAlignment="Top" Height="25" Width="200"/>
+        <Label Background="GhostWhite" BorderBrush="DarkGray" BorderThickness="1" Content="{Binding MNBWCF}" HorizontalAlignment="Left" Margin="10,614,0,10" Width="200"/>
+
+    </Grid>
+</Window>

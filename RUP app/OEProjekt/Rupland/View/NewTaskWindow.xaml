@@ -1,0 +1,28 @@
+﻿<Window x:Class="CurrentProject.View.NewTaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RUPland - Új feladat felvétele" Height="385" Width="250" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+
+        <StackPanel Margin="10">
+            
+            <Label Content="Feladat"></Label>
+            <TextBox Text="{Binding TextBoxTaskName}" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,5" Padding="5,0,0,0" TabIndex="1"></TextBox>
+
+            <Label Content="Leírás"></Label>
+            <TextBox Text="{Binding TextBoxDescription}" Height="60" Margin="0,0,0,5" Padding="5" TextWrapping="Wrap" TabIndex="2"></TextBox>
+
+            <Label Content="Mérföldkő"></Label>
+            <ComboBox ItemsSource="{Binding ComboBoxMilestones}" SelectedValue="{Binding SelectedMilestoneId}" DisplayMemberPath="Name" SelectedValuePath="MilestoneId" Margin="0,0,0,5" TabIndex="3"></ComboBox>
+
+            <Label Content="Kiosztva"></Label>
+            <ComboBox ItemsSource="{Binding ComboBoxMembers}" SelectedValue="{Binding SelectedMemberUserId}" DisplayMemberPath="FullName" SelectedValuePath="UserId" Margin="0,0,0,15" TabIndex="4"></ComboBox>
+
+            <Button Content="Felvétel" Height="25" Margin="0,0,0,10" Cursor="Hand" Click="buttonOK_Click" TabIndex="5"/>
+
+            <Label Content="{Binding LabelError}" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="11" Foreground="Red" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,38 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="SeaWindow1" x:Class="frogger.SeaWindow"
+        Title="SeaWindow" Loaded="Window_Loaded_1" PreviewKeyDown="Window_PreviewKeyDown_1" WindowStyle="None" ResizeMode="NoResize" >
+
+    <Grid Background="Black">
+        <Canvas x:Name="canvas" Margin="0,30,0,30" Panel.ZIndex="2" >
+            <Label x:Name="labelgoal" Content="G        O        A        L        " Height="32" Canvas.Left="10" Canvas.Top="10" Width="{Binding ColumnsXaml}" 
+				BorderBrush="Black" BorderThickness="0" FontSize="14" FontWeight="ExtraBlack" HorizontalContentAlignment="Center" 
+				VerticalContentAlignment="Stretch" Panel.ZIndex="98" Padding="6,5,5,5" FontStretch="UltraExpanded" FontFamily="Hobo Std" 
+				HorizontalAlignment="Center">
+                <Label.Effect>
+                    <DropShadowEffect BlurRadius="4" ShadowDepth="3"/>
+                </Label.Effect>
+            </Label>     
+        </Canvas>
+        
+        <Grid x:Name="canvaslabels" Panel.ZIndex="100">
+            <Button Content="X" Width="25" HorizontalAlignment="Right" Height="25" VerticalAlignment="Top" Panel.ZIndex="101" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Kristen ITC" FontSize="15" FontWeight="ExtraBlack" Click="Button_Click_1" Margin="0,1,1,0"/>
+            <Label x:Name="labellevel" FontStretch="UltraExpanded" FontFamily="Kristen ITC" Height="30"  Width="{Binding ColumnsXaml}" Foreground="#FF31BBC9" ForceCursor="True" HorizontalAlignment="Left" FontSize="15" Panel.ZIndex="100" VerticalAlignment="Top" VerticalContentAlignment="Bottom" FontWeight="Black" Margin="10,0,0,0" />
+            <Label x:Name="labelhighscore" FontStretch="UltraExpanded" FontFamily="Kristen ITC" Height="30" Width="{Binding ColumnsXaml}" Foreground="#FF31BBC9" ForceCursor="True" HorizontalAlignment="Left" FontSize="15" Panel.ZIndex="100" VerticalAlignment="Top" VerticalContentAlignment="Bottom" FontWeight="Black" Margin="190,1,0,0"/>
+            <Label x:Name="labelscore" FontStretch="UltraExpanded" FontFamily="Kristen ITC" Height="30" Width="{Binding ColumnsXaml}" Foreground="#FF31BBC9" ForceCursor="True" HorizontalAlignment="Left" FontSize="15" Panel.ZIndex="100" VerticalAlignment="Top" FontWeight="Black" Margin="440,0,0,0" />
+            <Label x:Name="labeltime" FontStretch="UltraExpanded" FontFamily="Kristen ITC" Height="30" Width="{Binding ColumnsXaml}" Foreground="#FF31BBC9" ForceCursor="True" HorizontalAlignment="Right" FontSize="15" Panel.ZIndex="100" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Black" Margin="0,0,14,0"/>
+            <Label Content="f r o g s :  " FontStretch="UltraExpanded" FontFamily="Kristen ITC" Height="30" Width="{Binding ColumnsXaml}" Foreground="#FF31BBC9" ForceCursor="True" HorizontalAlignment="Left" FontSize="15" Panel.ZIndex="100" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" FontWeight="Black" Margin="10,0,0,0"/>
+        </Grid>
+
+        <Canvas x:Name="froglife1" Width="28" Height="25" Panel.ZIndex="100" Margin="100,467,630,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <Canvas x:Name="froglife2" Width="28" Height="25" Panel.ZIndex="100" Margin="145,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Canvas x:Name="froglife3" Width="28" Height="25" Panel.ZIndex="100" Margin="190,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Canvas x:Name="froglife4" Width="28" Height="25" Panel.ZIndex="100" Margin="235,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden"/>
+        <Canvas x:Name="froglife5" Width="28" Height="25" Panel.ZIndex="100" Margin="280,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden"/>
+        <Canvas x:Name="froglife6" Width="28" Height="25" Panel.ZIndex="100" Margin="325,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden"/>
+        <Canvas x:Name="froglife7" Width="28" Height="25" Panel.ZIndex="100" Margin="370,493,628,2" MaxHeight="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden"/>
+
+    </Grid>
+
+</Window>

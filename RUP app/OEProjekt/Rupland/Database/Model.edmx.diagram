@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e4b7d71614884296a8f4c4c892d657e4" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DatabaseModel.Chat" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Difficulty" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Methodology" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Milestone" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Project" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.ProjectMember" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Role" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Task" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.chat_project_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.chat_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.project_difficulty_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.milestone_methodology_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.project_methodology_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.task_milestone_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.project_member_project_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.task_project_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.project_member_role_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.project_member_user_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.user_security_question_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.task_user_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

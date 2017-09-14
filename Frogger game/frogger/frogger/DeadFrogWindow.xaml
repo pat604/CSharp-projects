@@ -1,0 +1,11 @@
+﻿<Window x:Class="frogger.DeadFrogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DeadFrogWindow" Height="109.994" Width="148.624" WindowStyle="None" 
+        ResizeMode="NoResize" Background="Black" Loaded="Window_Loaded_1" PreviewKeyDown="Window_PreviewKeyDown_1" >
+    <Grid>
+        <Button Content="X" Width="18" Click="Button_Click_1" RenderTransformOrigin="-1.806,-0.972" HorizontalAlignment="Right" Height="18" VerticalAlignment="Top" Panel.ZIndex="99" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Tekton Pro"/>
+        <Canvas x:Name="canvas" Height="81" Margin="34,19,34,10" VerticalAlignment="Center"/>
+    </Grid>
+
+</Window>

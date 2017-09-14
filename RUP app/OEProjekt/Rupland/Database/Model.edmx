@@ -1,0 +1,782 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Chat" EntityType="DatabaseModel.Store.Chat" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Difficulty" EntityType="DatabaseModel.Store.Difficulty" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Methodology" EntityType="DatabaseModel.Store.Methodology" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Milestone" EntityType="DatabaseModel.Store.Milestone" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Project" EntityType="DatabaseModel.Store.Project" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProjectMember" EntityType="DatabaseModel.Store.ProjectMember" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="DatabaseModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SecurityQuestion" EntityType="DatabaseModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Task" EntityType="DatabaseModel.Store.Task" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="DatabaseModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="chat_project_fk" Association="DatabaseModel.Store.chat_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="chat_user_fk" Association="DatabaseModel.Store.chat_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="milestone_methodology_fk" Association="DatabaseModel.Store.milestone_methodology_fk">
+            <End Role="Methodology" EntitySet="Methodology" />
+            <End Role="Milestone" EntitySet="Milestone" />
+          </AssociationSet>
+          <AssociationSet Name="project_difficulty_fk" Association="DatabaseModel.Store.project_difficulty_fk">
+            <End Role="Difficulty" EntitySet="Difficulty" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_project_fk" Association="DatabaseModel.Store.project_member_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_role_fk" Association="DatabaseModel.Store.project_member_role_fk">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_user_fk" Association="DatabaseModel.Store.project_member_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="project_methodology_fk" Association="DatabaseModel.Store.project_methodology_fk">
+            <End Role="Methodology" EntitySet="Methodology" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="task_milestone_fk" Association="DatabaseModel.Store.task_milestone_fk">
+            <End Role="Milestone" EntitySet="Milestone" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="task_project_fk" Association="DatabaseModel.Store.task_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="task_user_fk" Association="DatabaseModel.Store.task_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="user_security_question_fk" Association="DatabaseModel.Store.user_security_question_fk">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ChatId" />
+          </Key>
+          <Property Name="ChatId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Difficulty">
+          <Key>
+            <PropertyRef Name="DifficultyId" />
+          </Key>
+          <Property Name="DifficultyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Methodology">
+          <Key>
+            <PropertyRef Name="MethodologyId" />
+          </Key>
+          <Property Name="MethodologyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Milestone">
+          <Key>
+            <PropertyRef Name="MilestoneId" />
+          </Key>
+          <Property Name="MilestoneId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Scale" Type="int" Nullable="false" />
+          <Property Name="MethodologyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="DifficultyId" Type="int" Nullable="false" />
+          <Property Name="MethodologyId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="RealEndDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="tinyint" Nullable="false" />
+          <Property Name="Registered" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectMember">
+          <Key>
+            <PropertyRef Name="ProjectMemberId" />
+          </Key>
+          <Property Name="ProjectMemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="SecurityQuestionId" />
+          </Key>
+          <Property Name="SecurityQuestionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="MilestoneId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Task" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="ntext" Nullable="false" />
+          <Property Name="Completed" Type="int" Nullable="false" />
+          <Property Name="CompletedDate" Type="datetime" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Lastname" Type="nvarchar" Nullable="false" MaxLength="32" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="96" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="SecurityQuestionId" Type="int" Nullable="false" />
+          <Property Name="SecurityQuestionAnswer" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Registered" Type="datetime" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" />
+        </EntityType>
+        <Association Name="chat_project_fk">
+          <End Role="Project" Type="DatabaseModel.Store.Project" Multiplicity="1" />
+          <End Role="Chat" Type="DatabaseModel.Store.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="chat_user_fk">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="Chat" Type="DatabaseModel.Store.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="milestone_methodology_fk">
+          <End Role="Methodology" Type="DatabaseModel.Store.Methodology" Multiplicity="1" />
+          <End Role="Milestone" Type="DatabaseModel.Store.Milestone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Methodology">
+              <PropertyRef Name="MethodologyId" />
+            </Principal>
+            <Dependent Role="Milestone">
+              <PropertyRef Name="MethodologyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_difficulty_fk">
+          <End Role="Difficulty" Type="DatabaseModel.Store.Difficulty" Multiplicity="1" />
+          <End Role="Project" Type="DatabaseModel.Store.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Difficulty">
+              <PropertyRef Name="DifficultyId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="DifficultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_project_fk">
+          <End Role="Project" Type="DatabaseModel.Store.Project" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.Store.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_role_fk">
+          <End Role="Role" Type="DatabaseModel.Store.Role" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.Store.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_user_fk">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.Store.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_methodology_fk">
+          <End Role="Methodology" Type="DatabaseModel.Store.Methodology" Multiplicity="1" />
+          <End Role="Project" Type="DatabaseModel.Store.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Methodology">
+              <PropertyRef Name="MethodologyId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="MethodologyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_milestone_fk">
+          <End Role="Milestone" Type="DatabaseModel.Store.Milestone" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Milestone">
+              <PropertyRef Name="MilestoneId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="MilestoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_project_fk">
+          <End Role="Project" Type="DatabaseModel.Store.Project" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_user_fk">
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_security_question_fk">
+          <End Role="SecurityQuestion" Type="DatabaseModel.Store.SecurityQuestion" Multiplicity="1" />
+          <End Role="User" Type="DatabaseModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="SecurityQuestionId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="SecurityQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DatabaseEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Chat" EntityType="DatabaseModel.Chat" />
+          <EntitySet Name="Difficulty" EntityType="DatabaseModel.Difficulty" />
+          <EntitySet Name="Methodology" EntityType="DatabaseModel.Methodology" />
+          <EntitySet Name="Milestone" EntityType="DatabaseModel.Milestone" />
+          <EntitySet Name="Project" EntityType="DatabaseModel.Project" />
+          <EntitySet Name="ProjectMember" EntityType="DatabaseModel.ProjectMember" />
+          <EntitySet Name="Role" EntityType="DatabaseModel.Role" />
+          <EntitySet Name="SecurityQuestion" EntityType="DatabaseModel.SecurityQuestion" />
+          <EntitySet Name="Task" EntityType="DatabaseModel.Task" />
+          <EntitySet Name="User" EntityType="DatabaseModel.User" />
+          <AssociationSet Name="chat_project_fk" Association="DatabaseModel.chat_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="chat_user_fk" Association="DatabaseModel.chat_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="project_difficulty_fk" Association="DatabaseModel.project_difficulty_fk">
+            <End Role="Difficulty" EntitySet="Difficulty" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="milestone_methodology_fk" Association="DatabaseModel.milestone_methodology_fk">
+            <End Role="Methodology" EntitySet="Methodology" />
+            <End Role="Milestone" EntitySet="Milestone" />
+          </AssociationSet>
+          <AssociationSet Name="project_methodology_fk" Association="DatabaseModel.project_methodology_fk">
+            <End Role="Methodology" EntitySet="Methodology" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="task_milestone_fk" Association="DatabaseModel.task_milestone_fk">
+            <End Role="Milestone" EntitySet="Milestone" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_project_fk" Association="DatabaseModel.project_member_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="task_project_fk" Association="DatabaseModel.task_project_fk">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_role_fk" Association="DatabaseModel.project_member_role_fk">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="project_member_user_fk" Association="DatabaseModel.project_member_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="user_security_question_fk" Association="DatabaseModel.user_security_question_fk">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="task_user_fk" Association="DatabaseModel.task_user_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ChatId" />
+          </Key>
+          <Property Name="ChatId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Project" Relationship="DatabaseModel.chat_project_fk" FromRole="Chat" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.chat_user_fk" FromRole="Chat" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Difficulty">
+          <Key>
+            <PropertyRef Name="DifficultyId" />
+          </Key>
+          <Property Name="DifficultyId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Project" Relationship="DatabaseModel.project_difficulty_fk" FromRole="Difficulty" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Methodology">
+          <Key>
+            <PropertyRef Name="MethodologyId" />
+          </Key>
+          <Property Name="MethodologyId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Milestone" Relationship="DatabaseModel.milestone_methodology_fk" FromRole="Methodology" ToRole="Milestone" />
+          <NavigationProperty Name="Project" Relationship="DatabaseModel.project_methodology_fk" FromRole="Methodology" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Milestone">
+          <Key>
+            <PropertyRef Name="MilestoneId" />
+          </Key>
+          <Property Name="MilestoneId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Scale" Type="Int32" Nullable="false" />
+          <Property Name="MethodologyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Methodology" Relationship="DatabaseModel.milestone_methodology_fk" FromRole="Milestone" ToRole="Methodology" />
+          <NavigationProperty Name="Task" Relationship="DatabaseModel.task_milestone_fk" FromRole="Milestone" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DifficultyId" Type="Int32" Nullable="false" />
+          <Property Name="MethodologyId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RealEndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <Property Name="Registered" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Chat" Relationship="DatabaseModel.chat_project_fk" FromRole="Project" ToRole="Chat" />
+          <NavigationProperty Name="Difficulty" Relationship="DatabaseModel.project_difficulty_fk" FromRole="Project" ToRole="Difficulty" />
+          <NavigationProperty Name="Methodology" Relationship="DatabaseModel.project_methodology_fk" FromRole="Project" ToRole="Methodology" />
+          <NavigationProperty Name="ProjectMember" Relationship="DatabaseModel.project_member_project_fk" FromRole="Project" ToRole="ProjectMember" />
+          <NavigationProperty Name="Task" Relationship="DatabaseModel.task_project_fk" FromRole="Project" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="ProjectMember">
+          <Key>
+            <PropertyRef Name="ProjectMemberId" />
+          </Key>
+          <Property Name="ProjectMemberId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="DatabaseModel.project_member_project_fk" FromRole="ProjectMember" ToRole="Project" />
+          <NavigationProperty Name="Role" Relationship="DatabaseModel.project_member_role_fk" FromRole="ProjectMember" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.project_member_user_fk" FromRole="ProjectMember" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ProjectMember" Relationship="DatabaseModel.project_member_role_fk" FromRole="Role" ToRole="ProjectMember" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="SecurityQuestionId" />
+          </Key>
+          <Property Name="SecurityQuestionId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.user_security_question_fk" FromRole="SecurityQuestion" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="MilestoneId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Task1" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Completed" Type="Byte" Nullable="false" />
+          <Property Name="CompletedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Milestone" Relationship="DatabaseModel.task_milestone_fk" FromRole="Task" ToRole="Milestone" />
+          <NavigationProperty Name="Project" Relationship="DatabaseModel.task_project_fk" FromRole="Task" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="DatabaseModel.task_user_fk" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="96" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="SecurityQuestionId" Type="Int32" Nullable="false" />
+          <Property Name="SecurityQuestionAnswer" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="Registered" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Chat" Relationship="DatabaseModel.chat_user_fk" FromRole="User" ToRole="Chat" />
+          <NavigationProperty Name="ProjectMember" Relationship="DatabaseModel.project_member_user_fk" FromRole="User" ToRole="ProjectMember" />
+          <NavigationProperty Name="SecurityQuestion" Relationship="DatabaseModel.user_security_question_fk" FromRole="User" ToRole="SecurityQuestion" />
+          <NavigationProperty Name="Task" Relationship="DatabaseModel.task_user_fk" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <Association Name="chat_project_fk">
+          <End Role="Project" Type="DatabaseModel.Project" Multiplicity="1" />
+          <End Role="Chat" Type="DatabaseModel.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="chat_user_fk">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="1" />
+          <End Role="Chat" Type="DatabaseModel.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_difficulty_fk">
+          <End Role="Difficulty" Type="DatabaseModel.Difficulty" Multiplicity="1" />
+          <End Role="Project" Type="DatabaseModel.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Difficulty">
+              <PropertyRef Name="DifficultyId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="DifficultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="milestone_methodology_fk">
+          <End Role="Methodology" Type="DatabaseModel.Methodology" Multiplicity="1" />
+          <End Role="Milestone" Type="DatabaseModel.Milestone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Methodology">
+              <PropertyRef Name="MethodologyId" />
+            </Principal>
+            <Dependent Role="Milestone">
+              <PropertyRef Name="MethodologyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_methodology_fk">
+          <End Role="Methodology" Type="DatabaseModel.Methodology" Multiplicity="1" />
+          <End Role="Project" Type="DatabaseModel.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Methodology">
+              <PropertyRef Name="MethodologyId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="MethodologyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_milestone_fk">
+          <End Role="Milestone" Type="DatabaseModel.Milestone" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Milestone">
+              <PropertyRef Name="MilestoneId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="MilestoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_project_fk">
+          <End Role="Project" Type="DatabaseModel.Project" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_project_fk">
+          <End Role="Project" Type="DatabaseModel.Project" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_role_fk">
+          <End Role="Role" Type="DatabaseModel.Role" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="project_member_user_fk">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="1" />
+          <End Role="ProjectMember" Type="DatabaseModel.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="user_security_question_fk">
+          <End Role="SecurityQuestion" Type="DatabaseModel.SecurityQuestion" Multiplicity="1" />
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="SecurityQuestionId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="SecurityQuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_user_fk">
+          <End Role="User" Type="DatabaseModel.User" Multiplicity="1" />
+          <End Role="Task" Type="DatabaseModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="DatabaseModel.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Difficulty">
+            <EntityTypeMapping TypeName="DatabaseModel.Difficulty">
+              <MappingFragment StoreEntitySet="Difficulty">
+                <ScalarProperty Name="DifficultyId" ColumnName="DifficultyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Methodology">
+            <EntityTypeMapping TypeName="DatabaseModel.Methodology">
+              <MappingFragment StoreEntitySet="Methodology">
+                <ScalarProperty Name="MethodologyId" ColumnName="MethodologyId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Milestone">
+            <EntityTypeMapping TypeName="DatabaseModel.Milestone">
+              <MappingFragment StoreEntitySet="Milestone">
+                <ScalarProperty Name="MilestoneId" ColumnName="MilestoneId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Scale" ColumnName="Scale" />
+                <ScalarProperty Name="MethodologyId" ColumnName="MethodologyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="DatabaseModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DifficultyId" ColumnName="DifficultyId" />
+                <ScalarProperty Name="MethodologyId" ColumnName="MethodologyId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="RealEndDate" ColumnName="RealEndDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Registered" ColumnName="Registered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectMember">
+            <EntityTypeMapping TypeName="DatabaseModel.ProjectMember">
+              <MappingFragment StoreEntitySet="ProjectMember">
+                <ScalarProperty Name="ProjectMemberId" ColumnName="ProjectMemberId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="DatabaseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityQuestion">
+            <EntityTypeMapping TypeName="DatabaseModel.SecurityQuestion">
+              <MappingFragment StoreEntitySet="SecurityQuestion">
+                <ScalarProperty Name="SecurityQuestionId" ColumnName="SecurityQuestionId" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="DatabaseModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="MilestoneId" ColumnName="MilestoneId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Task1" ColumnName="Task" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="DatabaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SecurityQuestionId" ColumnName="SecurityQuestionId" />
+                <ScalarProperty Name="SecurityQuestionAnswer" ColumnName="SecurityQuestionAnswer" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Registered" ColumnName="Registered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

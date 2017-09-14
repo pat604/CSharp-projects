@@ -1,0 +1,22 @@
+﻿<Window x:Class="CurrentProject.View.NewMemberWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rupland - Új résztvevő felvétele" Height="245" Width="375" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        
+        <StackPanel Margin="10">
+
+            <Label Content="Résztvevő e-mail címe" Margin="0,0,0,2"/>
+            <TextBox Text="{Binding TextBoxEmail}" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,5" Padding="5,0,0,0" MaxLines="1"/>
+
+            <Label Content="Szerepkör" Margin="0,0,0,2"/>
+            <ComboBox ItemsSource="{Binding ComboBoxRole}" SelectedValue="{Binding SelectedRoleId}" DisplayMemberPath="Name" SelectedValuePath="RoleId" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,15" TabIndex="3" />
+
+            <Button x:Name="buttonNewMember" Content="Felvétel" Height="25" Margin="0,0,0,10" Cursor="Hand" TabIndex="3" Click="buttonNewMember_Click"/>
+
+            <Label Content="{Binding LabelError}" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="11" Foreground="Red" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="CurrentProject.View.NewProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rupland - Új projekt" Height="655" Width="460" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Margin="10">
+
+            <Label Content="Név" Margin="0,0,0,2"/>
+            <TextBox Text="{Binding TextBoxName}" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,5" Padding="5,0,0,0" TabIndex="1" MaxLength="70"/>
+
+            <Label Content="Leírás" Margin="0,0,0,2"/>
+            <TextBox Text="{Binding TextBoxDescription}" Height="80" Margin="0,0,0,5" Padding="5" TabIndex="1" TextWrapping="Wrap"/>
+
+            <Label Content="Nehézség" Margin="0,0,0,2"/>
+            <ComboBox ItemsSource="{Binding ComboBoxDifficulty}" SelectedValue="{Binding SelectedDifficultyId}" DisplayMemberPath="Name" SelectedValuePath="DifficultyId" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,5" TabIndex="3" />
+
+            <Label Content="Módszertan" Margin="0,0,0,2"/>
+            <ComboBox ItemsSource="{Binding ComboBoxMethodology}" SelectedValue="{Binding SelectedMethodologyId}" DisplayMemberPath="Name" SelectedValuePath="MethodologyId" Height="23" VerticalContentAlignment="Center" Margin="0,0,0,5" TabIndex="4" />
+
+            <Label Content="Indulás dátuma" Margin="0,0,0,2"/>
+            <DatePicker Height="24" SelectedDate="{Binding DatePickerStartDate}" VerticalContentAlignment="Center" Padding="5,2,2,2" FirstDayOfWeek="Monday" DisplayDate="2015-04-21" Margin="0,0,0,5" BorderBrush="#FFACACAC" TabIndex="3" />
+
+            <Label Content="Befejezés dátuma" Margin="0,0,0,2"/>
+            <DatePicker Height="24" SelectedDate="{Binding DatePickerEndDate}" VerticalContentAlignment="Center" Padding="5,2,2,2" FirstDayOfWeek="Monday" DisplayDate="2015-04-21" Margin="0,0,0,15" BorderBrush="#FFACACAC" TabIndex="6" />
+
+            <Button x:Name="buttonNewProject" Content="Új projekt" Height="25" Margin="0,0,0,10" Cursor="Hand" Click="buttonNewProject_Click" TabIndex="7"/>
+
+            <Label Content="{Binding LabelError}" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="11" Foreground="Red" FontWeight="SemiBold" Margin="0,0,0,15"/>
+            
+            <Label Content="Információ(k) - Mérföldkövek és egy lehetséges időbeosztás" BorderThickness="0,0,0,1" BorderBrush="#FFD8D8D8" Margin="0,0,0,5"/>
+            <Label Content="{Binding Information}"/>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,25 @@
+﻿<Window x:Class="frogger.EndWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="the end" Height="272" Width="475" Loaded="Window_Loaded_1" PreviewKeyDown="Window_PreviewKeyDown_1" 
+        WindowStyle="None" ResizeMode="NoResize">
+    <Grid Background="Black">
+        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="73" Margin="0,40,0,0" VerticalAlignment="Top" Width="461"/>
+        <Label Content="the frog is dead." HorizontalAlignment="Center" FontFamily="Kristen ITC" Height="34" Margin="35,130,35,104" VerticalAlignment="Center" Width="398" Foreground="#FFCD1212" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"/>
+        <Label x:Name="labelnewhighscore" Content="NEW HIGH SCORE!" FontWeight="Black" HorizontalAlignment="Center" FontFamily="Kristen ITC" Height="34" Margin="287,185,-5,53" VerticalAlignment="Center" Width="193" Foreground="#FFCD1212" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-10.343"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-36.318"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="labeldrowned" Content="he's drowned..." FontFamily="Kristen ITC" HorizontalAlignment="Center" Height="54" Margin="38,147,39,71" VerticalAlignment="Center" Width="398" Foreground="#FFCD1212" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15"/>
+        <Button Content="X" Width="25" RenderTransformOrigin="-1.806,-0.972" HorizontalAlignment="Right" Height="25" VerticalAlignment="Top" Panel.ZIndex="99" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Kristen ITC" FontSize="15" FontWeight="ExtraBlack" Click="Button_Click_3"/>
+        <Button Content="new game" Margin="79,0,244,33" FontSize="15" FontFamily="Kristen ITC" FontWeight="ExtraBlack" Click="Button_Click_1" Height="33" VerticalAlignment="Bottom"/>
+        <Button Content="exit" Margin="244,0,79,33" FontSize="15" FontFamily="Kristen ITC" FontWeight="ExtraBlack" Click="Button_Click_2" Height="33" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
